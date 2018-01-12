@@ -8,12 +8,14 @@ class Grid:
         self.unoccupied_ids = list(range(16))
         for i in list(range(random.randint(2,3))):
             self.insert_new_randoms()
-        print(self.unoccupied_ids)
     def __str__(self):
         str_out = ""
         for xs in self.grid:
             str_out += " \t".join(map(str, xs)) + "\n"
         return str_out
+    def __eq__(self, other):
+        #compare based on grids
+        return self.grid == other.grid
     def insert_new_randoms(self):
         n = self.unoccupied_ids[random.randint(0, len(self.unoccupied_ids)-1)]
         self.unoccupied_ids.remove(n)
@@ -42,7 +44,7 @@ class Grid:
                     if (len(elements) > 1 and elements[-1] == elements[-2]):
                         elements.insert(0, elements.pop() + elements.pop())
             if (direction <= 0):
-                elements = elements + [[] for _ in list(range(len(line)-len(elements)))]
+                elements = elements[::-1] + [[] for _ in list(range(len(line)-len(elements)))]
             else:
                 elements = [[] for _ in list(range(len(line)-len(elements)))] + elements
             self.grid[i] = elements
@@ -63,7 +65,7 @@ class Grid:
         #insert blank lists
         for i in list(range(len(collection))):
             if (direction <= 0):
-                collection[i] = [[] for _ in list(range(len(self.grid)-len(collection[i])))] + collection[i]
+                collection[i] = [[] for _ in list(range(len(self.grid)-len(collection[i])))] + collection[i][::-1]
             else:
                 collection[i] = collection[i] + [[] for _ in list(range(len(self.grid)-len(collection[i])))]
         for i in list(range(len(self.grid))):
