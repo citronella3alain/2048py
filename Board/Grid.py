@@ -42,7 +42,7 @@ class Grid:
                 if element:
                     elements.append(element)
                     if (len(elements) > 1 and elements[-1] == elements[-2]):
-                        elements.insert(0, elements.pop() + elements.pop())
+                        elements.append(elements.pop() + elements.pop())
             if (direction <= 0):
                 elements = elements[::-1] + [[] for _ in list(range(len(line)-len(elements)))]
             else:
