@@ -34,8 +34,8 @@ class Grid:
         #merges blocks if their values are equal
         for i in list(range(len(self.grid))):
             line = self.grid[i]
-            if (direction <= 0):
-                line.reverse()
+            #if (direction <= 0):
+            line.reverse()
             elements = []
             for j in list(range(len(line))):
                 element = line[j]
@@ -46,7 +46,7 @@ class Grid:
             if (direction <= 0):
                 elements = elements[::-1] + [[] for _ in list(range(len(line)-len(elements)))]
             else:
-                elements = [[] for _ in list(range(len(line)-len(elements)))] + elements
+                elements = [[] for _ in list(range(len(line)-len(elements)))] + elements[::-1]
             self.grid[i] = elements
     def shift_y(self, direction):
         direction = int(direction/abs(direction))
